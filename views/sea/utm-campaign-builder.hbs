@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html>
+	{{> header}}
+	<body>
+		{{> body_style}}
+			<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"> </script>
+			<link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+			<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+
+			<div class="hero-section" style="background-image:url(/inbound-marketing.jpg);">
+			{{> h1_section}}
+			</div>
+			<p>Créez facilement vos liens correctement taggués pour vos campagnes Webmarketing avec notre outil simplifié de taggage UTM.</p>
+			<h2>Outil de Taggage UTM</h2>
+			<p>Assemblez vos mots-clés avec les bons types de correspondances et maximisez vos performances.</p>
+
+
+			<div class="tag_buttons">
+				<table class="first_assemblers">
+				<tr>
+					<td>
+						<button onclick="addTracking('facebook')" type="button" class="btn btn-primary btn-lg">Tag Facebook</button></td>
+					<td><button onclick="addTracking('instagram')" type="button" class="btn btn-primary btn-lg">Tag Instagram</button></td>
+				</tr>
+				<tr>
+					<td>	
+					<button onclick="addTracking('bing')" type="button" class="btn btn-primary btn-lg">Tag Bing</button></td>
+					<td><button onclick="addTracking('taboola')" type="button" class="btn btn-primary btn-lg">Tag Taboola</button></td>
+				</tr>
+				</table>
+			</div>
+
+			<div class="checkbox">
+				<h4 class="checkbox-text"> Activer s'il s'agit de campagnes Ads </h4>
+				<input checked data-toggle="toggle" type="checkbox">
+			</div>
+
+	<div style="width:100%; display: inline-block"></div>
+
+			<hr style="margin-top:10px;">
+
+			<div class="fields">
+			<h3>URL de la landing page</h3>
+			<input placeholder="https://www.mon-super-site.com/landing-page" class="landing-page" name="landing-page" size = 50px"></input>
+			</div>
+		
+
+			<hr>
+
+			<h3>Nom de la campagne</h3>
+			<h4 class="descriptif" col = 2> Donnez un nom reconnaissable à votre campagne.  </h4>
+			<input placeholder="Nommez_votre_campagne" class="utm_area" name="campaign_name" size = 50px></input>
+
+			<h3>Source de la campagne</h3>
+			<h4 class="descriptif" col = 2> Spécifiez la plateforme utilisée </h4>
+			<input placeholder="D_ou_vient_votre_campagne" class="utm_area" name="campaign_source" size = 50px></input>
+
+			<h3>Support de la campagne</h3>
+			<h4 class="descriptif" col = 2> Renseignez le support de votre campagne. Ex: cpc, cpm, cpv etc. </h4>
+			<input placeholder="Quel_support_est_utilisé" class="utm_area" name="campaign_support" size = 50px></input>
+
+			<h3>Contenu de la campagne</h3>
+			<h4 class="descriptif" col = 2>Ajouter des détails sur votre campagne si vous le souhaitez </h4>
+			<input placeholder="Up_to_you" class="utm_area" name="keyword_1" size = 50px></input>
+
+			<h3>URL Tagguée à récupérer</h3>
+			<textarea placeholder="Votre URL finale" ="utm_full_link" name="full_link" cols="50" rows="3"></textarea>
+
+			<div style="display:none" id="invisible_kw">
+				<input class="copy_to_clipboard" id="copy_to">
+				</input>
+			</div>
+		</div>
+	{{> footer}}
+
+
+	<script>
+	var landingPageUrl = "";
+	var utmSource = undefined;
+	var utmSupport = undefined;
+	var utmContent = undefined;
+	var taggedUrl = undefined;
+
+	function addTracking(trackingType) {
+		var monthAndYear = getMonthAndYear();
+
+		switch (trackingType) {
+			
+			case 'facebook':
+			if (document.getElementsByTagName("input")[0].checked) {
+			utmSource = "facebook";
+			utmSupport = "cpc";
+			utmContent = "facebook_ads_" + monthAndYear + "_campaign";
+			}
+			else {
+			utmSource = "facebook";
+			utmSupport = "referral";
+			utmContent = "facebook_referral_" + monthAndYear + "_post";
+			}
+			break;
+
+			case 'instagram':
+			if (document.getElementsByTagName("input")[0].checked) {
+			utmSource = "instagram";
+			utmSupport = "cpc";
+			utmContent = "instagram_ads_" + monthAndYear + "_campaign";
+			}
+			else {
+			utmSource = "instagram";
+			utmSupport = "referral";
+			utmContent = "instagram_referral_" + monthAndYear + "_post";
+			}
+			break;
+
+			case 'bing':
+			utmSource = "bing";
+			utmSupport = "cpc";
+			utmContent = "bing_ads_" + monthAndYear + "_campaign";
+			break;
+
+			case 'taboola':
+			utmSource = "taboola";
+			utmSupport = "cpc";
+			utmContent = "taboola_ads_" + monthAndYear + "_campaign";
+			break;
+
+			default:
+			if (document.getElementsByTagName("input")[0].checked) {
+			utmSource = "";
+			utmSupport = "";
+			utmContent = monthAndYear + "_campaign";
+			}
+			else
+			{
+			utmSource = "";
+			utmSupport = "";
+			utmContent = monthAndYear + "_post";	
+			}
+		}
+
+		document.getElementsByName("campaign_source")[0].value = utmSource;
+		document.getElementsByName("campaign_support")[0].value = utmSupport;
+		document.getElementsByName("campaign_name")[0].value =  utmContent;
+
+		assembleUrl();
+	}
+
+	function assembleUrl() {
+		landingPageUrl = document.getElementsByName("landing-page")[0].value;
+		var urlValue = landingPageUrl.length
+		
+		if(landingPageUrl != "") {
+			if(landingPageUrl.substring(urlValue-1,urlValue) == "/") {
+		    	taggedUrl = landingPageUrl+"?utm_source="+utmSource+"&utm_medium="+utmSupport+"&utm_campaign="+utmContent;	
+			}	
+			else {
+				taggedUrl = landingPageUrl+"/?utm_source="+utmSource+"&utm_medium="+utmSupport+"&utm_campaign="+utmContent;
+			}
+		}
+		else {
+			taggedUrl = "utm_source="+utmSource+"&utm_medium="+utmSupport+"&utm_campaign="+utmContent;	
+		}
+
+		document.getElementsByName("full_link")[0].value = taggedUrl;
+		copyToClipboard();
+	}
+		
+	function getMonthAndYear() {
+		var date = new Date()
+		var months = ["janvier", "février", "mars", "avril", "mai", "juin", "juillet", "aout", "septembre", "octobre", "novembre", "décembre"]
+		var today = "";
+
+		if(date.getMonth() >= 5 && date.getMonth() <= 8) {
+      		today = months[date.getMonth()].substring(0,4)+"_"+ date.getFullYear();
+      		return today
+    	}
+    	else {
+      		today = months[date.getMonth()].substring(0,3)+"_"+ date.getFullYear();
+      		return today
+   		 }
+   	}
+/*
+   	function copyToClipboard() {
+   		document.getElementById("copy_to").value = taggedUrl;
+   		var copyText = document.getElementById("copy_to");
+   		 copyText.select();
+   		 document.execCommand("copy"); 
+   		 alert("Copied the text: " + copyText.value);
+   	}
+*/
+	</script>
+	</body>
+</html>
+
+<style>
+
+h4.descriptif{
+
+	float: right;
+	margin-left: 1%;
+	font-size: 70%;
+	border-style: solid;
+	border-width: 1px;
+	padding: 1% 1% 1% 1%;
+	columns: auto;
+	width: 40%;
+	color: #8f8f8f;
+	border-color: black;
+}
+
+h3 {
+	margin-top: 15px;
+}
+
+.tag_buttons {
+
+	width: 75%;
+	float: left;
+}
+
+.fields{
+
+	display:inline-block;
+}
+
+.checkbox {
+
+	margin-top: 45px;
+}
+
+.checkbox-text {
+
+	font-size: 70%;
+}
+
+.btn.btn-primary.btn-lg {
+	width: 80%;
+}
+
+table {
+	width: 100%;
+}
+
+</style>

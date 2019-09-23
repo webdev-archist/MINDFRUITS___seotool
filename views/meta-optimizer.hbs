@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+	{{> header}}
+	<body>
+		<div class="hero-section" style="background-image:url(/inbound-marketing.jpg);">
+		{{> h1_section}}
+		</div>
+		{{> seo_back}}
+		<p>Découvrez comment optimiser votre title et votre meta-description pour Google.</p>
+		<input type="title" class="form-control" id="input-title" aria-describedby="title" placeholder="Entrez votre title">
+		<input type="url" class="form-control" id="input-url" aria-describedby="metades" placeholder="Entrez votre URL">
+		<input type="metades" class="form-control" id="input-metades" aria-describedby="metades" placeholder="Entrez votre méta-description">
+		<div class="URL_box"> 
+			<button onclick="startPreview()" type="button" class="btn btn-primary btn-lg" style="margin-bottom: 30px;">Je teste mes métas</button>
+		</div>
+		<table class="google-frame"style="width:100%;">
+			<tr>
+				<td>
+					<div style="margin:20px">
+						<div class="res-title">Comment optimiser votre Title et Meta-Description | Outils SEO</div>
+						<div class="res-url">https://outils.mindfruits.biz/outils-seo/optimisation-title-metades-seo</div>
+						<div class="res-metades">Découvrez comment optimiser votre title et votre meta-description pour les moteurs de recherche. Toutes les astuces et meilleures pratiques !</div>
+					<div>
+				</td>
+			</tr>
+		</table>
+	{{> footer}}
+
+	<script>
+	function startPreview() {
+		var seoTitle = document.getElementById("input-title").value;
+		var seoUrl = document.getElementById("input-url").value;
+		var seoMetades = document.getElementById("input-metades").value;
+
+		// Vérification de la longueur du title
+		if(seoTitle.length>0) {
+			if(seoTitle.length>71) {
+				document.getElementsByClassName("res-title")[0].innerText = seoTitle.slice(1,70) + "...";
+			} else {
+				document.getElementsByClassName("res-title")[0].innerText = seoTitle;
+			}
+		}
+
+		// Vérification de la longueur de la meta-description
+		if(seoMetades.length>0) {
+			if(seoMetades.length>152) {
+				document.getElementsByClassName("res-metades")[0].innerText = seoMetades.slice(1,152) + "...";
+			} else {
+				document.getElementsByClassName("res-metades")[0].innerText = seoMetades;
+			}
+		}
+		document.getElementsByClassName("res-url")[0].innerText = document.getElementById("seoUrl").value;
+	}
+
+	</script>
+	</body>
+</html>

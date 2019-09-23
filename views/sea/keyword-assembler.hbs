@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+	{{> header}}
+	<body>
+		{{> body_style}}
+			<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+			<div class="hero-section" style="background-image:url(/inbound-marketing.jpg);">
+			{{> h1_section}}
+			</div>
+			<p>Découvrez tous nos outils SEA pour améliorer les performances de vos campagnes AdWords.</p>
+			<h2>L'assembleur de Mots-clés</h2>
+			<p>Assemblez vos mots-clés avec les bons types de correspondances et maximisez vos performances.</p>
+
+			<h3>Mots-clés de rang 1</h3>
+			<textarea placeholder="achat&#10;vente" class="keyword_textarea" name="keyword_1" cols="30" rows="10">achat&#10;vente</textarea>
+
+			<h3>Mots-clés de rang 2</h3>
+			<textarea placeholder="chaussures&#10;vestes&#10;chemises" class="keyword_textarea" name="keyword_2" cols="30" rows="10">chaussures&#10;vestes&#10;chemises</textarea>
+
+			<h3>Mots-clés de rang 3</h3>
+			<textarea placeholder="pas cher&#10;en ligne" class="keyword_textarea" name="keyword_3" cols="30" rows="10">pas cher&#10;en ligne</textarea>
+
+			<div class="keyword_buttons">
+				<div class="first_assemblers">
+					<button onclick="keyWordAssembler('simple')" type="button" class="btn btn-primary btn-lg">Assemblage simple</button>
+					<button onclick="keyWordAssembler('restricted')" type="button" class="btn btn-primary btn-lg">Assemblage restreint</button>
+				</div>
+				<!--<div class="second_assemblers">
+					<h3>Ajoutez un type de correspondance à vos mots-clés :</h3>
+					<button type="button" class="btn btn-primary btn-lg">Semi-large</button>
+					<button type="button" class="btn btn-primary btn-lg">Expression exacte</button>
+					<button type="button" class="btn btn-primary btn-lg">Mot-clé Exact</button>
+				</div>-->
+			</div>
+			<div id="keyword_result"></div>
+			<div style="display:none" id="invisible_kw"></div>
+			<div id="add_cta"></div>
+		</div>
+		{{> footer}}
+
+
+	<script>
+	var assembledKeywords = []
+
+	function keyWordAssembler(assemblerType) {
+		var keywordRange1 = document.getElementsByName("keyword_1")[0].value.split('\n');
+		var keywordRange2 = document.getElementsByName("keyword_2")[0].value.split('\n');
+		var keywordRange3 = document.getElementsByName("keyword_3")[0].value.split('\n');
+
+		var keywordArray = [keywordRange1.toString(),keywordRange2.toString(),keywordRange3.toString()]
+		assembledKeywords = [];
+
+		var currentKeyword = "";
+
+		for(var kw1 in keywordRange1)  {
+
+			for(var kw2 in keywordRange2)  {
+				if(keywordArray[1]) {
+					currentKeyword = keywordRange1[kw1] + " " + keywordRange2[kw2];
+					if(assemblerType == "simple") {
+						assembledKeywords.push(currentKeyword);
+					}
+					if(keywordArray[2]) {
+						for(var kw3 in keywordRange3)  {
+							currentKeyword = keywordRange1[kw1] + " " + keywordRange2[kw2] + " " + keywordRange3[kw3];
+							assembledKeywords.push(currentKeyword);
+						}
+					}
+				} else {
+					assembledKeywords.push(keywordRange1[kw1]);
+				}
+			}
+		}
+		console.log("Assemblage terminé.");
+		console.log(assembledKeywords);
+
+		document.getElementById('keyword_result').innerHTML = '<textarea class="keyword_textarea_result" name="keyword_2" cols="30" rows="' + (assembledKeywords.length+2) + '">' +  assembledKeywords.toString().replace(/,/g,'&#10;')+ '</textarea>';
+		document.getElementById('add_cta').innerHTML = '<h3>Ajoutez un type de correspondance à vos mots-clés :</h3><p>Boostez les performances de votre campagne en ajoutant un type de correspondance à vos mots-clés. Ces derniers permettront de limiter la diffusion de votre campagne aux mots-clés qui vous intéressent vraiment.</p><div class="second_assemblers"><div><button onclick="semiLargeAssembler()" type="button" class="btn btn-primary btn-lg">Semi-large</button></div><div><button onclick="toExactKeyWord(false)"type="button" class="btn btn-primary btn-lg">Expression exacte</button></div><div><button onclick="toExactKeyWord(true)" type="button" class="btn btn-primary btn-lg">Mot-clé Exact</button></div></div>'
+		//document.getElementById("keyword_result").scrollIntoView();
+
+	    $('html, body').animate({
+	      scrollTop: $("div#keyword_result").offset().top
+	    }, 2000);
+
+
+		//copyToClipboard();
+	}
+
+	function copyToClipboard() {
+	  var copyText = document.getElementById("keyword_result"); //assembledKeywords.toString().replace(/,/g,'/n');
+	  copyText.select();
+	  document.execCommand("Copy");
+	  console.log("Sélection copiée")
+	}
+
+	function semiLargeAssembler() {
+		var semiLargeKeyWords = [];
+		for(kw in assembledKeywords) {
+			semiLargeKeyWords.push(toSemiLarge(assembledKeywords[kw]));
+		}
+		document.getElementById('keyword_result').innerHTML = '<textarea class="keyword_textarea_result" name="keyword_2" cols="30" rows="' + (semiLargeKeyWords.length+2) + '">' +  semiLargeKeyWords.toString().replace(/,/g,'&#10;')+ '</textarea>';
+	}
+
+	function toExactKeyWord(exactType) {
+		var exactKeyWords = [];
+		for(kw in assembledKeywords) {
+			if(exactType) {
+				exactKeyWords.push("[" + assembledKeywords[kw] + "]")
+			} else {
+				exactKeyWords.push('"' + assembledKeywords[kw] + '"')
+			}
+		}
+		document.getElementById('keyword_result').innerHTML = '<textarea class="keyword_textarea_result" name="keyword_2" cols="30" rows="' + (exactKeyWords.length+2) + '">' +  exactKeyWords.toString().replace(/,/g,'&#10;')+ '</textarea>';		
+	}
+
+	function toSemiLarge(keyword) {
+		keyword = keyword.replace(/\+/g,"");
+		keyword = keyword.replace(/ +(?= )/g,'');
+		keyword = "+" + keyword.split(' ').join(' +');
+		return keyword
+	}
+
+	</script>
+	</body>
+</html>

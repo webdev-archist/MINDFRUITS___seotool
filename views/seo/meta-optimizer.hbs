@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		{{> header}}
+	</head>
+	<body>
+
+		{{> menu}}
+
+		<main id="main">
+
+			<div id="hero-section">
+
+				{{> h1_section}}
+
+			</div>
+
+			<div id="seo_back">
+				{{> seo_back}}
+	 		</div>
+
+			<form onSubmit="return false">
+				{{> seo_form}}
+			</form>
+
+			<div id="seo_results">
+				{{> seo_results}}
+			</div>
+
+			<div id="recommandationsPlaceholder"></div>
+
+		</main>
+
+		<div id="before_footr"></div>
+
+		<footer>
+			{{> footer}}
+		</footer>
+
+		{{> toolsbox }}
+
+		<script src="/index.js"></script>
+	</body>
+</html>

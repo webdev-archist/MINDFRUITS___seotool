@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+	{{> header}}
+	<body>
+		<div class="hero-section" style="background-image:url(/inbound-marketing.jpg);">
+		{{> h1_section}}
+		</div>
+		<p>Découvrez tous nos outils SEA pour améliorer les performances de vos campagnes AdWords.</p>
+		<h2>L'assembleur de Mots-clés</h2>
+		<p>Assemblez vos mots-clés avec les bons types de correspondances et maximisez vos performances.</p>
+		<h3>Mots-clés de rang 1</h3>
+		<textarea placeholder="achat&#10;vente" class="keyword_textarea" name="keyword_1" cols="30" rows="10"></textarea>
+		<h3>Mots-clés de rang 2</h3>
+		<textarea placeholder="chaussures&#10;vestes&#10;chemises" class="keyword_textarea" name="keyword_2" cols="30" rows="10">
+</textarea>
+
+		<h3>Mots-clés de rang 3</h3>
+
+		<textarea placeholder="pas cher&#10;en ligne" class="keyword_textarea" name="keyword_3" cols="30" rows="10"></textarea>
+		<div class="keyword_buttons">
+			<div class="first_assemblers">
+				<button type="button" class="btn btn-primary btn-lg">Assemblage simple</button>
+				<button type="button" class="btn btn-primary btn-lg">Assemblage en mot-clé exact</button>
+			</div>
+			<div class="second_assemblers">
+				<button type="button" class="btn btn-primary btn-lg">Assemblage en semi-large</button>
+				<button type="button" class="btn btn-primary btn-lg">Assemblage en semi-large sans les associations larges</button>
+			</div>
+		</div>
+	{{> footer}}
+	</body>
+</html>
