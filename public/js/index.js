@@ -26,7 +26,7 @@
       else
         $tr.append($('<td/>').append($('<span/>').attr({"data-status": {color:resObjStatus[0][0]}, style: {color:resObjStatus[0][1]}})))
   }
-  $("#seo_results--score").append($myTable)
+  $("#visuel--stats").append($myTable)
 
   //PERMET LE CLIC SUR LES OUTILS DANS LA TOOLBOX(bas de page)
   $(tool_box).on('click', '>div>button', function(){
@@ -35,14 +35,14 @@
   })
 
 
-  $(seo_results).on('click', function(e){e.stopPropagation()})
+  $("#seo_results--score, #seo_results--visuel").on('click', function(e){console.log(e);e.stopPropagation()})
   //PERMET DE QUITTER LE MODE MODAL
   $(seo_results).add(myModal).on('click', function(){$(seo_results).add(myModal).removeClass('on');if(this.className=="plus")$(seo_results).add(myModal).removeClass('plus')})
 
   //PRE-REMPLIR
   $(inputTitle).bind(
-    {paste: function(e) {   alert(e); resTitle.innerHTML = e.target.innerHTML  },
-    {change: function(e) {    resTitle.innerHTML = e.target.innerHTML  }
+    {paste: function(e) {   alert(e); resTitle.innerHTML = e.target.innerHTML  }},
+    {change: function(e) {    resTitle.innerHTML = e.target.innerHTML  }}
   )
   $(inputUrl).bind(
     {paste: function(e) {    resUrl.innerHTML = e.target.innerHTML  }},

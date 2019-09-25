@@ -50,12 +50,16 @@
   #seo_results>*:before{content:"";width:100%;box-shadow:0 0 20px 25px white;position:absolute;bottom:0;}
   #seo_results--visuel{left:0;border-top-right-radius: 15px;}
   #seo_results--score{right:0; font-family: arial,sans-serif;text-align:right;border-top-left-radius: 15px;}
-  #seo_results.on>*{z-index:20;box-shadow:0 0 10px 1px;}
+  #seo_results.on>*{z-index:20;box-shadow:0 0 10px 1px black;}
   #seo_results.on>*{opacity:1}
   .on>#seo_results--visuel{width:45%;}
-  .on>#seo_results--score{width:45%;max-width: 640px;}
+                          #visuel--google{margin:20px}
+                          #visuel--stats{background:silver;    position: absolute;    left: 0;    right: 0;    height: 62%;    bottom: 0;    padding: 1rem;}
   .on>#seo_results--score>table{ }
       #seo_results--score>table{ }
+  .on>#seo_results--score{width:45%;max-width: 640px;}
+                          #score--score{}
+                          #score--advices{}
   #r_container{background-color: #FFFFFF;height: 150px;width: 100%; margin-top: 20px;margin-bottom: 20px;padding: 20px;}
   .on+#recommandationsPlaceholder{ width: 100%;    margin: 0;z-index: 20;  position: fixed;  left:0;  bottom: 0;    border: solid;    border-bottom: none;    background: whitesmoke;    padding: 1rem;}
 
