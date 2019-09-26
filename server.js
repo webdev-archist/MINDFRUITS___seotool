@@ -89,19 +89,22 @@ app.get('/', (req, res) => {
 // Ci-après toutes les pages et sous-catégories SEO
 app.get('/seo-tools', (req, res) => {
 	res.render('seo/seo-tools.hbs', {
-		pageH1: 'Outils SEO : Boostez votre référencement',
+		pageH1: 'Outils SEO :',
+		pageP: 'Boostez votre référencement',
 	});
 });
 
 app.get('/seo-tools/meta-optimizer', (req, res) => {
 	res.render('seo/meta-optimizer.hbs', {
-		pageH1: 'Outil SEO : Optimisateur de métas pour Google',
+		pageH1: 'Outil SEO :',
+		pageP: 'Optimisateur de métas pour Google',
 	});
 });
 
 app.get('/seo-tools/crawler', (req, res) => {
 	res.render('seo/mf-crawler.hbs', {
-		pageH1: 'Outil SEO : Crawler de site internet',
+		pageH1: 'Outil SEO :',
+		pageP: 'Crawler de site internet',
 	});
 });
 

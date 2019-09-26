@@ -18,12 +18,9 @@ html,body{min-height:100%;}
 .menu_element {
   color: #9d9d9d;
   width: 150px;
-  height: auto;
   text-transform: uppercase;
   font-weight: bold;
   text-align: center;
-  float: left;
-  margin-top: 38px;
 }
 
 .menu_element p:hover {
@@ -431,22 +428,11 @@ textarea.keyword_textarea {
   margin-bottom: 10px;
 }
 
-div.h1_block {
-  vertical-align: baseline;
-  position:absolute;
-  text-align: left;
-  height: 200px;
-  margin: 0 auto;
-}
 
 .h1_block h1 {
-  color: #ffffff;
-  font-size: 40px;
+  color: var(--c0);
   padding-left: 50px;
   padding-right: 50px;
-  width: 80%;
-  top: 50%;
-  transform: translateY(50%);
 }
 
 .h1_elements {

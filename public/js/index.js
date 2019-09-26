@@ -35,7 +35,7 @@
   })
 
 
-  $("#seo_results--score, #seo_results--visuel").on('click', function(e){console.log(e);e.stopPropagation()})
+  $("#seo_results .card").on('click', function(e){console.log(e);e.stopPropagation()})
   //PERMET DE QUITTER LE MODE MODAL
   $(seo_results).add(myModal).on('click', function(){$(seo_results).add(myModal).removeClass('on');if(this.className=="plus")$(seo_results).add(myModal).removeClass('plus')})
 
@@ -121,7 +121,7 @@
       }
     }
 
-    recommandationsPlaceholder.innerHTML = 	'<div id="r_container"><p>Notre avis :</p><ul> ' + recommandations + '</ul></div>';
+    $("#recommandationsPlaceholder>article#advices").html('<div id="r_container"><p>Notre avis :</p><ul> ' + recommandations + '</ul></div>');
     scoreResult.innerText = contentScore + '/100';
 
     if(contentScore<50) {
