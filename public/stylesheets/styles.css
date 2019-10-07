@@ -428,13 +428,6 @@ textarea.keyword_textarea {
   margin-bottom: 10px;
 }
 
-
-.h1_block h1 {
-  color: var(--c0);
-  padding-left: 50px;
-  padding-right: 50px;
-}
-
 .h1_elements {
   vertical-align: middle;
 }

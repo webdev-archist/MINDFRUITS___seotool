@@ -34,16 +34,21 @@
   #header_logo>img{max-height: 70px; height:auto; width:auto; margin-top: 7px;}
   #menu_principal{width:80%; float:right;}
   #menu_principal_{float:right;}
-  #header_ div.navbar-nav>a.nav-item{border-bottom:solid var(--c0);}
-  #header_ div.navbar-nav>a.nav-item.active{border-bottom:solid green;color:var(--c0);}
+  #header_ div.navbar-nav{width:90%;position:relative;background:var(--cc0);z-index:1}
+  #header_ div.navbar-nav>a.nav-item{border-bottom:solid var(--c0);width:100%;transition: color .7s, border-color .7s}
+  #header_ div.navbar-nav>a.nav-item.active,#header_ div.navbar-nav>a.nav-item:hover{border-bottom:solid green;color:var(--c0);}
+  #header_ div.navbar-nav>a.nav-item:not(.active):hover{border:solid white;color:white;border-top:0;border-radius: 10px;}
 
   #main{border:1px solid silver;box-shadow: 0px 5px 10px 1px;background:white;z-index:10;}
   #main>#hero-section {position:relative;background-image:url(https://sandbox.mindfruits.biz/inbound-marketing.jpg);  }
         #hero-section>.jumbotron{background:none;width:100%;}
-        #hero-section>.jumbotron p.lead{    transform: translateY(200%);    color: whitesmoke;}
-        #hero-section .container>* {          float: left;    }
+        #hero-section .container>* {    position: absolute; margin: 0;     }
+        #hero-section>.jumbotron p.lead{  bottom: 0;       right: 0;    color: whitesmoke;}
+        #hero-section>.jumbotron h1{           color: var(--c0);     font-size:2rem;top:0;    }
+        }
   #main>*:not(#hero-section):not(#recommandationsPlaceholder) {    margin: 0 1%;    width: 98%;}
   #main>#seo_back{font-size:10px; font-style: italic;}
+  #main form{padding:0 2rem;}
   #main form>input:not(#un) {margin-top:1rem;}
   #main form>p{width:100%;text-align:center;}
   #main button.btn-mindfruits{transition:color .3s !important;background-color:var(--c0);color:white;text-shadow:0 0 1px black;    width: 90%;    height: 50px;    box-sizing: border-box;font-weight:100}
@@ -55,7 +60,7 @@
   #before_footr:not(.on){opacity:.5}
   */
   .on,#before_footr:hover{opacity:1}
-  table{width: 100%;background:var(--c0) !important;border: solid var(--cc0);}
+  table{margin:2rem 0;width: 100%;background:var(--c0) !important;border: solid var(--cc0);}
   table>thead,#before_footr>table>tbody>tr>td:first-of-type{color:var(--cc0);border-right:solid}
   table>thead>tr>th:last-of-type{border-left:solid var(--cc0)}
   table>thead>tr>th:first-of-type{border-right:solid var(--cc0)}
@@ -68,19 +73,19 @@
 
   #seo_results{}
   #seo_results>*{ opacity: .3;border-bottom:solid;z-index:-1;position:fixed;top:100%;height: 65%;overflow:hidden;}
-  #seo_results>*:before{content:"";width:95%;box-shadow:0 0 20px 25px white;position:absolute;bottom:0;}
   #seo_results>#seo_results--score:before{right:0%;}
+  #seo_results>#seo_results--score:after{border-left:0;left:0%;    border-bottom-left-radius: 0;    border-bottom-right-radius: 200px;}
   #seo_results--visuel{left:0;border-top-right-radius: 15px;}
   #seo_results--score{right:0; font-family: arial,sans-serif;text-align:right;border-top-left-radius: 15px;}
   #seo_results.on>*{z-index:20;top:0%;;opacity:1}
-  #seo_results.on>*>*{height:100%;overflow-y: scroll;}
+  #seo_results.on>*>*:not(#mobileOnly){height:96%;overflow: scroll;z-index:100;}
   .on>#seo_results--visuel{}
-                          #visuel--google{margin:20px;    margin-right: 200px;}
-                          #visuel--stats{background:silver;    position: absolute;    left: 0;    right: 0;    height: 62%;    bottom: 0;    padding: 1rem;}
+
+                          #visuel--stats{border-top:solid;box-shadow: 0 0 10px 1px;background: linear-gradient(90deg, rgba(165, 205, 110, .5) 0%, rgba(200,200,200,.6) 56%, rgba(165, 205, 110, .5) 100%);    position: absolute;    left: 0;   top: 65%;    padding: 1rem;}
+                          #visuel--stats .card-header{color:var(--c0);font-weight:900;text-shadow:0 0 1px black, 0 0 3px black;border:solid}
   .on>#seo_results--score>table{ }
       #seo_results--score>table{ }
   .on>#seo_results--score{}
-                          #score--score{margin:20px;    margin-left: 200px;}
                           #score--advices{}
   #r_container{background-color: #FFFFFF;height: 150px;width: 100%; margin-top: 20px;margin-bottom: 20px;padding: 20px;}
       #recommandationsPlaceholder{ height: 0;    padding: 0;}
@@ -88,12 +93,14 @@
       #recommandationsPlaceholder>.deco:first-of-type{}
       #recommandationsPlaceholder>.deco:last-of-type{}
       #recommandationsPlaceholder>#advices{}
-  .on+#recommandationsPlaceholder{ z-index: 20;  width:100%; position: fixed;  left:0;  bottom: 0;     height: 35%;    padding: 1rem;    border-radius: 5px 5px 0 0;    box-shadow: 0 0 10px 1px;   border-top: solid;    background: whitesmoke;}
+      .on+#recommandationsPlaceholder{ z-index: 20;  width:100%; position: fixed;  left:0;  bottom: 0;     height: 35%;    padding: 1rem;    border-radius: 5px 5px 0 0;    box-shadow: 0 0 10px 1px;   border-top: solid;    background: whitesmoke;}
+      .on+#recommandationsPlaceholder:before{color:rgba(111,111,111,.5);content: "Retrouvez nos conseils pour améliorer votre ranking";    font-size: 5rem;    width: 100%;    display: block;    text-align: center;font-family:Impact, Charcoal, sans-serif;}
+
 
 
 
   #myModal{background:silver;}
-  #myModal.on{position:fixed;top:0;right:0;bottom:0;left:0;background:rgba(0,0,0,.5);cursor:pointer;}
+  #myModal.on{position:fixed;top:0;right:0;bottom:0;left:0;background:rgba(0,0,0,.7);cursor:pointer;}
   #myModal.plus+iframe#myIframe{height: 700px;box-shadow: 0 0 10px 1px;    border:solid silver;border-bottom: none;opacity:1;}
   iframe#myIframe{position:absolute;    bottom: 45px;    left: 15%;    width: 70%;    height: 0px;   border:none;    background: white;border-radius:5px 5px 0 0;opacity:0.5;}
 
@@ -103,3 +110,26 @@
   .alertFormat{color:#EA9757}
   #scoreResult{font-weight:bold; font-size:100px;}
   .tr07,#recommandationsPlaceholder,#myModal,#tool_box>*>button,#tool_box>*>button>img,#tool_box>*>span,iframe#myIframe,#seo_results,#seo_results>*,#main button.btn-mindfruits,#before_footr{transition: all .7s;}
+
+
+
+
+
+
+
+
+
+
+    @media screen and (min-width: 768px) {
+      #score--score{margin:20px;    margin-left: 25%;}
+      #visuel--google{margin:20px;    margin-right: 25%;}
+      .on+#recommandationsPlaceholder{  position: fixed;}
+      #seo_results>*>*{    box-shadow: 0 0 35px 1px black;}
+      #seo_results>*:not(#mobileOnly):before{content:"";width:80%;box-shadow:0 0 20px 25px white;position:absolute;bottom:0;}
+      #seo_results>*:after{content:"";width:25%;height:100%;box-shadow:0 0 100px 100px white;position:absolute;right:0;bottom:0;border-bottom-left-radius: 200px;border:10px solid var(--c0);border-top:0;border-right:0;}
+    }
+    @media screen and (max-width: 768px) {
+      .on>#seo_results--score{position:relative}
+      .on+#recommandationsPlaceholder{ position: relative;}
+      #mobileOnly{top:0;height: 45px; left: calc(50% - 300px);    position: absolute; z-index: 200000000 !important;}
+    }

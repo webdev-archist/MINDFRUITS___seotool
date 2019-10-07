@@ -26,6 +26,7 @@
       else
         $tr.append($('<td/>').append($('<span/>').attr({"data-status": {color:resObjStatus[0][0]}, style: {color:resObjStatus[0][1]}})))
   }
+  $("#visuel--stats table").remove()
   $("#visuel--stats").append($myTable)
 
   //PERMET LE CLIC SUR LES OUTILS DANS LA TOOLBOX(bas de page)
